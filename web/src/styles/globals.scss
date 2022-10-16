@@ -1,0 +1,29 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body, input textarea, button {
+  font: 500 1rem Inter, sans-serif;
+}
+
+body {
+  background: #121214;
+}
+
+button {
+  cursor: pointer;
+}
+
+@media (max-width: 1080px){
+  html {
+    font-size: 93.75%; // 15px
+  }
+}
+
+@media (max-width: 720px) {
+  html {
+    font-size: 87.5%; // 14px
+  }
+}
