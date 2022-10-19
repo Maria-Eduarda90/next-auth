@@ -33,8 +33,8 @@ export function Login(){
                 </form>
                 
                 <div className={styles.links}>
-                    <Link href="/">
-                        Esqueceu sua senha?
+                    <Link href="/password-recovery">
+                        <a>Esqueceu sua senha?</a>
                     </Link>
                     <Link href="/">
                         Não possui uma conta? Crie uma agora!
