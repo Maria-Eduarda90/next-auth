@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { Aside } from '../../components/Aside';
 import { Button } from '../../components/Button';
 import { Input } from '../../components/Input';
 import styles from './styles.module.scss';
@@ -6,13 +7,13 @@ import styles from './styles.module.scss';
 export function Login(){
     return(
         <div className={styles.container}>
-            <aside className={styles.aside}/>
+            <Aside/>
 
             <main>
                 <form>
                     <div>
                         <h1>Seja bem vindo!</h1>
-                        <h4>Faça login e comece a usar</h4>
+                        <h4>Faça login em sua conta e comece a usar</h4>
                     </div>
 
                     <section>
@@ -36,7 +37,7 @@ export function Login(){
                     <Link href="/password-recovery">
                         <a>Esqueceu sua senha?</a>
                     </Link>
-                    <Link href="/">
+                    <Link href="/sign-in">
                         Não possui uma conta? Crie uma agora!
                     </Link>
                 </div>

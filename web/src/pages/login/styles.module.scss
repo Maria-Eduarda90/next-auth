@@ -3,12 +3,6 @@
     align-items: center;
     height: 100vh;
 
-    .aside {
-        flex: 6;
-        background: #0E9888;
-        height: 100%;
-    }
-
     main {
         flex: 8;
 
@@ -20,11 +14,13 @@
 
         form {
             gap: 32px;
+            h1{
+                text-align: center;
+            }
             h4 {
                 color: #7C7C8A;
                 font-weight: normal;
                 font-size: 18px;
-                text-align: center;
             }
 
             div {
