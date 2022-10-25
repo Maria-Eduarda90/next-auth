@@ -1,0 +1,51 @@
+.container {
+    display: flex;
+    align-items: center;
+    height: 100vh;
+
+    main {
+        flex: 8;
+
+        form, .links {
+            display: flex;
+            flex-direction: column;
+            align-items: center
+        }
+
+        form {
+            gap: 32px;
+            h1{
+                text-align: center;
+            }
+            h4 {
+                color: #7C7C8A;
+                font-weight: normal;
+                font-size: 18px;
+            }
+
+            div {
+                display: flex;
+                flex-direction: column;
+                gap: 6px;
+            }
+
+            section {
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+
+        .links {
+            margin-top: 32px;
+            
+            a {
+                color: #7C7C8A;
+
+                & + a {
+                    margin-top: 1rem;
+                }
+            }
+        }
+    }
+}
