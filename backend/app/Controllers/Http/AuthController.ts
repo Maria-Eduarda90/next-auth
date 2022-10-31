@@ -39,7 +39,7 @@ export default class AuthController {
         data: user,
       }
     } catch {
-      return response.status(400).json({ message: 'Bad request' })
+      return response.status(400).json({ message: 'Já existe um usuario cadastrado com esse email' });
     }
   }
 
