@@ -1,7 +1,6 @@
 import Link from 'next/link';
 import { Aside } from '../Aside';
 import { Button } from '../Button';
-import { Input } from '../Input';
 import styles from './styles.module.scss';
 import { useForm } from 'react-hook-form';
 
