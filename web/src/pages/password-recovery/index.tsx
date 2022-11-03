@@ -10,16 +10,20 @@ export default function PasswordRecovery(){
             <Aside/>
 
             <main>
+                <div className={styles.title}>
+                    <h1>Esqueceu a senha?</h1>
+                    <h4>Digite seu e-mail e você receberá um link para alterar sua senha.</h4>
+                </div>
                 <form>
-                    <div>
-                        <h1>Esqueceu a senha?</h1>
-                        <h4>Digite seu e-mail e você receberá um link para alterar sua senha.</h4>
-                    </div>
-
                     <section>
                         <div>
                             <label htmlFor="">Endereço de email</label>
-                            <Input type="text" placeholder="johndoe@example.com" />
+                            <input
+                             className={styles.input}
+                             name="email"
+                             type="text"
+                             placeholder="johndoe@example.com" 
+                            />
                         </div>
                     </section>
 
