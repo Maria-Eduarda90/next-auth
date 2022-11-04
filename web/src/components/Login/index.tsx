@@ -3,12 +3,20 @@ import { Aside } from '../Aside';
 import { Button } from '../Button';
 import styles from './styles.module.scss';
 import { useForm } from 'react-hook-form';
+import { useContext } from 'react';
+import { AuthContext } from '../../context/AuthContext';
 
 export function Login(){
     const { register, handleSubmit } = useForm();
+    const { signIn } = useContext(AuthContext);
 
-    function handleSignIn(data){
-        console.log(data);
+    async function handleSignIn(data){
+        try {
+            await signIn(data);
+        } catch(error: any) {
+            const message = error.response.data.message;
+            throw new Error(message);
+        }
     }
 
     return(
