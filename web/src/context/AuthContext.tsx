@@ -1,14 +1,18 @@
 import { createContext, ReactNode, useEffect, useState } from "react";
-import { SignInProps } from "../data/@types/SignIn";
 import { setCookie, parseCookies } from 'nookies';
 import { UserProps } from "../data/@types/User";
+import { SignInProps } from "../data/@types/SignIn";
+import { SignUpProps } from "../data/@types/Login.";
 import Router from 'next/router';
 import api from "../api/api";
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 type AuthContextType = {
     isAuthenticated: boolean;
     user: UserProps | null;
     signIn: (data: SignInProps) => Promise<void>;
+    signUp: (data: SignUpProps) => Promise<SignUpProps>;
 }
 
 type ElementChildren = {
@@ -27,32 +31,54 @@ export function AuhtProvider({ children }: ElementChildren){
 
         if(token){
             api.get('user').then(response => {
-                setUser(response.data[0])
-                console.log('response: ', response.data[0])
+                setUser(response.data[0]);
             })
         }
-    }, [])
+    }, []);
+
+    async function signUp({ firstname, secondname, email, password }: SignUpProps){
+        const { data } = await api.post('user', {
+            firstname,
+            secondname,
+            email,
+            password
+        });
+
+        setTimeout(function(){
+            toast.success(data.message, {
+                position: toast.POSITION.TOP_RIGHT,
+            })
+        }, 1000)
+
+        Router.push('/')
+        return data;
+    }
 
     async function signIn({ email, password }: SignInProps){
         const { data } = await api.post("login", {
             email,
             password,
-        })
+        });
+
+        setTimeout(function () {
+            toast.success(data.message, {
+                position: toast.POSITION.TOP_RIGHT,
+            })
+        }, 1000)
 
         setCookie(undefined, 'nextauth.token', data.token.token, {
             maxAge: 60 * 60 * 1 // 1 hours
-        })
+        });
 
         api.defaults.headers["Authorization"] = `Bearer ${data.token.token}`;
 
         setUser(data.user);
-        console.log('token', data.token.token);
 
         Router.push('/blogs');
     }
 
     return(
-        <AuthContext.Provider value={{ user, isAuthenticated, signIn }}>
+        <AuthContext.Provider value={{ user, isAuthenticated, signIn, signUp }}>
             {children}
         </AuthContext.Provider>
     )
