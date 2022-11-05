@@ -5,17 +5,21 @@ import styles from './styles.module.scss';
 import { useForm } from 'react-hook-form';
 import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export function Login(){
     const { register, handleSubmit } = useForm();
     const { signIn } = useContext(AuthContext);
 
-    async function handleSignIn(data){
+    async function handleSignIn(data: any){
         try {
             await signIn(data);
         } catch(error: any) {
             const message = error.response.data.message;
-            throw new Error(message);
+            toast.error(message, {
+                position: toast.POSITION.TOP_RIGHT
+            });
         }
     }
 
@@ -65,6 +69,7 @@ export function Login(){
                     <Link href="/sign-up">
                         Não possui uma conta? Crie uma agora!
                     </Link>
+                    <ToastContainer />
                 </div>
             </main>
         </div>
