@@ -2,7 +2,7 @@ import { createContext, ReactNode, useEffect, useState } from "react";
 import { setCookie, parseCookies } from 'nookies';
 import { UserProps } from "../data/@types/User";
 import { SignInProps } from "../data/@types/SignIn";
-import { SignUpProps } from "../data/@types/Login.";
+import { SignUpProps } from "../data/@types/Login";
 import Router from 'next/router';
 import api from "../api/api";
 import { toast } from 'react-toastify';
