@@ -2,14 +2,17 @@ import { GetServerSideProps } from 'next';
 import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContext';
 import { parseCookies } from 'nookies';
+import { Header } from '../../components/Header';
+
+import styles from './styles.module.scss';
 
 export default function Blogs(){
     const { user } = useContext(AuthContext);
     return(
         <>
-            <h1>{user?.firstname}</h1>
-            <h1>{user?.secondname}</h1>
-            <h1>{user?.email}</h1>
+            <main className={styles.containerBlog}>
+                <Header />
+            </main>
         </>
     )
 }
