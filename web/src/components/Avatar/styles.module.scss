@@ -1,0 +1,18 @@
+.containerAvatar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .main {
+        padding: 2px;
+        background: linear-gradient(100deg, #0E9888 0%, #28e2cc 100%);
+        border-radius: 50%;
+        line-height: 0;
+
+        .avatar {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 50%;
+        }
+    }
+}
