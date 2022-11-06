@@ -30,8 +30,9 @@ export function AuhtProvider({ children }: ElementChildren){
         const { 'nextauth.token': token } = parseCookies();
 
         if(token){
-            api.get('user').then(response => {
-                setUser(response.data[0]);
+            api.get(`user`).then(response => {
+                setUser(response.data);
+                console.log('response: ', response.data)
             })
         }
     }, []);
@@ -43,6 +44,8 @@ export function AuhtProvider({ children }: ElementChildren){
             email,
             password
         });
+
+        console.log('data: ', data )
 
         setTimeout(function(){
             toast.success(data.message, {
@@ -59,6 +62,7 @@ export function AuhtProvider({ children }: ElementChildren){
             email,
             password,
         });
+        console.log('data: ', data)
 
         setTimeout(function () {
             toast.success(data.message, {
@@ -73,6 +77,7 @@ export function AuhtProvider({ children }: ElementChildren){
         api.defaults.headers["Authorization"] = `Bearer ${data.token.token}`;
 
         setUser(data.user);
+        console.log('datauser: ', data.user);
 
         Router.push('/blogs');
     }
