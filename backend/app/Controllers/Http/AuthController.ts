@@ -4,8 +4,8 @@ import User from 'App/Models/User';
 export default class AuthController {
   public async login({ request, auth, response }: HttpContextContract) {
     try {
-      const email = request.input('email');
-      const password = request.input('password');
+      const email = request.input('email')
+      const password = request.input('password')
 
       const token = await auth.use('api').attempt(email, password)
 
@@ -14,16 +14,12 @@ export default class AuthController {
         user: auth.user,
         token: token.toJSON(),
       }
-
     } catch {
-      return response
-        .status(400)
-        .json({ message: 'email ou senha incorretos' })
+      return response.status(400).json({ message: 'email ou senha incorretos' })
     }
   }
 
   public async register({ request, response }: HttpContextContract) {
-
     try {
       const { firstname, secondname, email, password } = request.only([
         'firstname',
@@ -32,10 +28,8 @@ export default class AuthController {
         'password',
       ])
 
-      if(firstname === '' || secondname === '' || email === '' || password === ''){
-        return response
-          .status(400)
-          .json({ message: 'Preencha todos os campos' });
+      if (firstname === '' || secondname === '' || email === '' || password === '') {
+        return response.status(400).json({ message: 'Preencha todos os campos' })
       }
 
       const user = await User.create({
@@ -60,5 +54,11 @@ export default class AuthController {
     const user = await User.query().preload('avatars')
 
     return user
+  }
+
+  public async show({ params }: HttpContextContract) {
+    const user = await User.findOrFail(params.id)
+
+    return user;
   }
 }
