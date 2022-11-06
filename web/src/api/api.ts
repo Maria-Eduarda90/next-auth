@@ -15,8 +15,6 @@ if(token){
       "Content-Type": "application/json",
     };
 
-    console.log('config: ', config);
-
     return config;
   });
 }
