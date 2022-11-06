@@ -1,0 +1,19 @@
+.header {
+    width: 100%;
+    position:fixed;
+    background: #202024;
+
+    .wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 1rem;
+
+        .content {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+    }
+}
