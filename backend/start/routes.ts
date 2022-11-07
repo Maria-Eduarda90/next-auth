@@ -4,7 +4,7 @@ Route.group(() => {
   Route.post('/login', 'AuthController.login')
   Route.post('/user', 'AuthController.register')
   Route.get('/user', 'AuthController.index').middleware('auth')
-  Route.get('/user/:id', 'AuthController.show').middleware('auth')
+  Route.get('/me/:id', 'AuthController.show').middleware('auth')
 
   Route.post('/image', 'AvatarsController.avatar').middleware('auth')
   Route.get('/image', 'AvatarsController.index').middleware('auth')
