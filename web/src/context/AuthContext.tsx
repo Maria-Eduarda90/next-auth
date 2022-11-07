@@ -13,6 +13,7 @@ type AuthContextType = {
     user: UserProps | null;
     signIn: (data: SignInProps) => Promise<void>;
     signUp: (data: SignUpProps) => Promise<SignUpProps>;
+    getCurrentUser: (id: number) => void;
 }
 
 type ElementChildren = {
@@ -23,19 +24,20 @@ export const AuthContext = createContext({} as AuthContextType);
 
 export function AuhtProvider({ children }: ElementChildren){
     const [user, setUser] = useState<UserProps | null>(null);
+    console.log('user', user);
 
     const isAuthenticated = !!user;
 
-    useEffect(() => {
-        const { 'nextauth.token': token } = parseCookies();
+    // useEffect(() => {
+    //     const { 'nextauth.token': token } = parseCookies();
 
-        if(token){
-            api.get(`user`).then(response => {
-                setUser(response.data);
-                console.log('response: ', response.data)
-            })
-        }
-    }, []);
+    //     if(token){
+    //         api.get(`user`).then(response => {
+    //             setUser(response.data);
+    //             console.log('response: ', response.data)
+    //         })
+    //     }
+    // }, []);
 
     async function signUp({ firstname, secondname, email, password }: SignUpProps){
         const { data } = await api.post('user', {
@@ -57,6 +59,18 @@ export function AuhtProvider({ children }: ElementChildren){
         return data;
     }
 
+    function getCurrentUser(id: number){
+        const { 'nextauth.user': user } = parseCookies();
+
+        if (user) {
+            api.get(`me/${id}`).then(response => {
+                setUser(response.data);
+                JSON.parse(user);
+                console.log('response: ', response.data)
+            })
+        }
+    }
+
     async function signIn({ email, password }: SignInProps){
         const { data } = await api.post("login", {
             email,
@@ -71,8 +85,14 @@ export function AuhtProvider({ children }: ElementChildren){
         }, 1000)
 
         setCookie(undefined, 'nextauth.token', data.token.token, {
-            maxAge: 60 * 60 * 1 // 1 hours
+            maxAge: 60 * 60 * 24 * 30, // 1 month
         });
+
+        setCookie(undefined, 'nextauth.user', JSON.stringify(data.user), {
+            maxAge: 60 * 60 * 24 * 30, // 1 month
+        });
+
+        // localStorage.setItem('@Blogs:User', JSON.stringify(data.user));
 
         api.defaults.headers["Authorization"] = `Bearer ${data.token.token}`;
 
@@ -80,10 +100,12 @@ export function AuhtProvider({ children }: ElementChildren){
         console.log('datauser: ', data.user);
 
         Router.push('/blogs');
+
+        getCurrentUser(data.user.id);
     }
 
     return(
-        <AuthContext.Provider value={{ user, isAuthenticated, signIn, signUp }}>
+        <AuthContext.Provider value={{ user, isAuthenticated, signIn, signUp, getCurrentUser }}>
             {children}
         </AuthContext.Provider>
     )
