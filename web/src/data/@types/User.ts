@@ -3,5 +3,5 @@ export type UserProps = {
   firstname: string;
   secondname: string;
   email: string;
-  avatar: string;
+  avatar?: string | null;
 };
