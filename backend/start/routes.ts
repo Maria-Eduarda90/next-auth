@@ -8,6 +8,7 @@ Route.group(() => {
 
   Route.post('/image', 'AvatarsController.avatar').middleware('auth')
   Route.get('/image', 'AvatarsController.index').middleware('auth')
+  Route.get('/image/:id', 'AvatarsController.show').middleware('auth')
 
   Route.post('/blog', 'BlogsController.create').middleware('auth')
   Route.get('/blog', 'BlogsController.index').middleware('auth')
