@@ -11,14 +11,14 @@ export default class AvatarsController {
   }
 
   public async avatar({ request, auth }: HttpContextContract) {
-    const image = request.file('image', this.validationOption);
-    const user_id = auth.user?.id;
+    const image = request.file('image', this.validationOption)
+    const user_id = auth.user?.id
 
-    if(image){
+    if (image) {
       const imageName = `${uuidv4()}.${image.extname}`
 
       await image.move(Application.tmpPath('uploads'), {
-        name: imageName
+        name: imageName,
       })
     }
 
@@ -27,12 +27,18 @@ export default class AvatarsController {
       user_id,
     })
 
-    return createImg;
+    return createImg
   }
 
-  public async index (){
+  public async index() {
     const image = await Avatar.query().preload('user')
 
-    return image;
+    return image
+  }
+
+  public async show({ params }: HttpContextContract) {
+    const image = await Avatar.findOrFail(params.id)
+
+    return image
   }
 }
