@@ -7,7 +7,7 @@ export function useAvatar(){
     const { user } = useContext(AuthContext);
 
     useEffect(() => {
-        api.get(`image/${user?.id}`).then((response) => {
+        api.get(`image`).then((response) => {
             setAvatar(response.data);
         })
     })
