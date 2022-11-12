@@ -1,19 +1,39 @@
 import { GetServerSideProps } from 'next';
-import { useContext, useEffect } from 'react';
-import { AuthContext } from '../../context/AuthContext';
 import { parseCookies } from 'nookies';
 import { Header } from '../../components/Header';
 
 import styles from './styles.module.scss';
-import { getApiClient } from '../../api/apiClient';
-import { api } from '../../api/api';
+import { Search } from '../../components/Search';
+import { ButtonAddBlog } from '../../components/ButtonAddBlog';
+import { Cards } from '../../components/Cards';
+import { FormModalBlog } from '../../components/FormModalBlog';
+import { useState } from 'react';
 
 export default function Blogs(){
+    const [modalIsOpen, setIsOpen] = useState(false);
+
+    function openModal() {
+        setIsOpen(true);
+    }
 
     return(
         <>
             <main className={styles.containerBlog}>
                 <Header />
+
+                <section className={styles.section}>
+                    <div className={styles.wrapper}>
+                        <Search />
+                        <ButtonAddBlog onClick={openModal}>
+                            + Add blog
+                        </ButtonAddBlog>
+                    </div>
+
+                    <Cards/>
+                    <div className={`${styles.modalWrapper} ${modalIsOpen ? `${styles.active}` : ''}`}>
+                        <FormModalBlog />
+                    </div>
+                </section>
             </main>
         </>
     )
