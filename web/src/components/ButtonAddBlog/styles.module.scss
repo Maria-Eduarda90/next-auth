@@ -1,0 +1,12 @@
+.buttonAddBlog {
+    padding: 12px 14px 12px 14px;
+    border-radius: 4px;
+    background: #0E9888;
+    transition: all 0.5s;
+    font-weight: bold;
+    border: none;
+
+    &:hover {
+        background: #09b5a0;
+    }
+}
