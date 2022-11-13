@@ -13,7 +13,7 @@ export default function Blogs(){
     const [modalIsOpen, setIsOpen] = useState(false);
 
     function openModal() {
-        setIsOpen(true);
+        setIsOpen(!modalIsOpen);
     }
 
     return(
@@ -31,7 +31,7 @@ export default function Blogs(){
 
                     <Cards/>
                     <div className={`${styles.modalWrapper} ${modalIsOpen ? `${styles.active}` : ''}`}>
-                        <FormModalBlog />
+                        <FormModalBlog onClick={openModal}/>
                     </div>
                 </section>
             </main>
