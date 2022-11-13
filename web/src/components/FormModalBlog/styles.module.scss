@@ -1,7 +1,59 @@
 .modal {
     background: #202024;
     border-radius: 8px;
-    width: min(55rem, 90%);
+    width: min(40rem, 90%);
     margin: auto;
-    padding: 1.5rem 3rem;
+    padding: 1rem 3rem;
+
+    h1 {
+        text-align: center;
+        margin-bottom: 1rem;
+        font-size: 20px;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+        fieldset {
+            border-radius: 4px;
+
+            legend {
+                margin-left: 1rem;
+            }
+
+            input, textarea{
+                width: 100%;
+                border: 0;
+                outline: none;
+                color: #fff;
+                background: transparent;
+                font-size: 1.1rem;
+                padding: 1rem;
+            }
+
+            textarea {
+                resize: none;
+                height: 16rem;
+            }
+        }
+
+        button {
+            padding: 0.8rem;
+            border-radius: 4px;
+            background: #0E9888;
+            border: 0;
+            font-weight: bold;
+        }
+    }
+
+    button {
+        width: 100%;
+        border-radius: 4px;
+        background: #CCC;
+        padding: 0.8rem;
+        border: 0;
+        font-weight: bold;
+        margin-top: 0.4rem;
+    }
 }
