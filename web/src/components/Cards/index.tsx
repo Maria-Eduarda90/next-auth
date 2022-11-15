@@ -1,115 +1,40 @@
 import Link from 'next/link';
+import { useEffect, useState } from 'react';
+import { api } from '../../api/api';
+import { BlogType } from '../../data/@types/Blog';
 import { TextUtils } from '../../utils/TextUtils';
 import styles from './styles.module.scss';
 
 export function Cards(){
+    const [blogs, setBlogs] = useState<BlogType[]>([]);
     const maximumTextSize = 200;
+
+    useEffect(() => {
+        api.get("/blog").then(response => {
+            setBlogs(response.data);
+        })
+    }, [blogs])
+
     return(
         <div className={styles.cardContainer}>
-            <div className={styles.card}>
-                <img src="https://files.tecnoblog.net/wp-content/uploads/2021/04/Qual-a-ordem-cronologica-dos-filmes-do-Batman-Deny-Freeman-Flickr.jpg" alt="" />
+            {blogs.map(blog => {
+                return(
+                    <div className={styles.card} key={blog.id}>
+                        <img src={blog.url} alt="" />
 
-                <div>
-                    <h1>Batman</h1>
-                    <p>
-                        {TextUtils.limitText('O Batman também conhecido pelas alcunhas Homem-Morcego, Cavaleiro das Trevas, Cruzado Encapuzado, Maior Detetive do Mundo, é um personagem fictício e super-herói encapuzado da editora norte-americana DC', maximumTextSize)}
-                    </p>
+                        <div>
+                            <h1>{blog.title}</h1>
+                            <p>
+                                {TextUtils.limitText(`${blog.description}`, maximumTextSize)}
+                            </p>
 
-                    <Link href="#">
-                        Ver mais+
-                    </Link>
-                </div>
-            </div> 
-
-            <div className={styles.card}>
-                <img src="https://files.tecnoblog.net/wp-content/uploads/2021/04/Qual-a-ordem-cronologica-dos-filmes-do-Batman-Deny-Freeman-Flickr.jpg" alt="" />
-
-                <div>
-                    <h1>Batman</h1>
-                    <p>
-                        {TextUtils.limitText('O Batman também conhecido pelas alcunhas Homem-Morcego, Cavaleiro das Trevas, Cruzado Encapuzado, Maior Detetive do Mundo, é um personagem fictício e super-herói encapuzado da editora norte-americana DC', maximumTextSize)}
-                    </p>
-
-                    <Link href="#">
-                        Ver mais+
-                    </Link>
-                </div>
-            </div> 
-
-            <div className={styles.card}>
-                <img src="https://files.tecnoblog.net/wp-content/uploads/2021/04/Qual-a-ordem-cronologica-dos-filmes-do-Batman-Deny-Freeman-Flickr.jpg" alt="" />
-
-                <div>
-                    <h1>Batman</h1>
-                    <p>
-                        {TextUtils.limitText('O Batman também conhecido pelas alcunhas Homem-Morcego, Cavaleiro das Trevas, Cruzado Encapuzado, Maior Detetive do Mundo, é um personagem fictício e super-herói encapuzado da editora norte-americana DC', maximumTextSize)}
-                    </p>
-
-                    <Link href="#">
-                        Ver mais+
-                    </Link>
-                </div>
-            </div> 
-
-            <div className={styles.card}>
-                <img src="https://files.tecnoblog.net/wp-content/uploads/2021/04/Qual-a-ordem-cronologica-dos-filmes-do-Batman-Deny-Freeman-Flickr.jpg" alt="" />
-
-                <div>
-                    <h1>Batman</h1>
-                    <p>
-                        {TextUtils.limitText('O Batman também conhecido pelas alcunhas Homem-Morcego, Cavaleiro das Trevas, Cruzado Encapuzado, Maior Detetive do Mundo, é um personagem fictício e super-herói encapuzado da editora norte-americana DC', maximumTextSize)}
-                    </p>
-
-                    <Link href="#">
-                        Ver mais+
-                    </Link>
-                </div>
-            </div> 
-
-            <div className={styles.card}>
-                <img src="https://files.tecnoblog.net/wp-content/uploads/2021/04/Qual-a-ordem-cronologica-dos-filmes-do-Batman-Deny-Freeman-Flickr.jpg" alt="" />
-
-                <div>
-                    <h1>Batman</h1>
-                    <p>
-                        {TextUtils.limitText('O Batman também conhecido pelas alcunhas Homem-Morcego, Cavaleiro das Trevas, Cruzado Encapuzado, Maior Detetive do Mundo, é um personagem fictício e super-herói encapuzado da editora norte-americana DC', maximumTextSize)}
-                    </p>
-
-                    <Link href="#">
-                        Ver mais+
-                    </Link>
-                </div>
-            </div> 
-
-            <div className={styles.card}>
-                <img src="https://files.tecnoblog.net/wp-content/uploads/2021/04/Qual-a-ordem-cronologica-dos-filmes-do-Batman-Deny-Freeman-Flickr.jpg" alt="" />
-
-                <div>
-                    <h1>Batman</h1>
-                    <p>
-                        {TextUtils.limitText('O Batman também conhecido pelas alcunhas Homem-Morcego, Cavaleiro das Trevas, Cruzado Encapuzado, Maior Detetive do Mundo, é um personagem fictício e super-herói encapuzado da editora norte-americana DC', maximumTextSize)}
-                    </p>
-
-                    <Link href="#">
-                        Ver mais+
-                    </Link>
-                </div>
-            </div> 
-
-            <div className={styles.card}>
-                <img src="https://files.tecnoblog.net/wp-content/uploads/2021/04/Qual-a-ordem-cronologica-dos-filmes-do-Batman-Deny-Freeman-Flickr.jpg" alt="" />
-
-                <div>
-                    <h1>Batman</h1>
-                    <p>
-                        {TextUtils.limitText('O Batman também conhecido pelas alcunhas Homem-Morcego, Cavaleiro das Trevas, Cruzado Encapuzado, Maior Detetive do Mundo, é um personagem fictício e super-herói encapuzado da editora norte-americana DC', maximumTextSize)}
-                    </p>
-
-                    <Link href="#">
-                        Ver mais+
-                    </Link>
-                </div>
-            </div> 
+                            <Link href="#">
+                                Ver mais+
+                            </Link>
+                        </div>
+                    </div> 
+                );
+            })}   
         </div>
     );
 }
