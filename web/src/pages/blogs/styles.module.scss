@@ -24,5 +24,13 @@
         opacity: 1;
       }
     }
+
+    .cardContainer {
+      display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    grid-gap: 1.5rem;
+    margin-top: 3rem;
+
+    }
   }
 }
