@@ -10,37 +10,34 @@ type FormModalBlogType = {
 }
 
 export function FormModalBlog(props: FormModalBlogType){
-    const [sendUrl, setSendUrl] = useState('');
-    const [sendTitle, setSendTitle] = useState('');
-    const [sendDescription, setSendDescription] = useState('');
+    const [url, setSendUrl] = useState('');
+    const [title, setSendTitle] = useState('');
+    const [description, setSendDescription] = useState('');
 
     async function handleSendBlog(e: FormEvent) {
         e.preventDefault();
 
-        if (sendUrl === null && sendUrl === ""
-         || sendTitle === null && sendTitle === ""
-         || sendDescription === null && sendDescription === ""
-        ){
-            return toast.error('os campos não podem ser limpos', {
+        if (!url.trim() || !title.trim() || !description.trim()){
+            return toast.error('Preencha todos os campos', {
                 position: toast.POSITION.TOP_RIGHT
             });
-        }
+        } else {
+            const data = {
+                url: url,
+                title: title,
+                description: description,
+            }
 
-        const data = {
-            url: sendUrl,
-            title: sendTitle,
-            description: sendDescription,
+            await api.post('blog', data);
+            setSendUrl("");
+            setSendTitle("");
+            setSendDescription("");
         }
-
-        await api.post('blog', data);
 
         toast.success('Blog criado com sucesso', {
             position: toast.POSITION.TOP_RIGHT
         });
-
-        setSendUrl("");
-        setSendTitle("");
-        setSendDescription("");
+  
     }
 
     return(
@@ -54,8 +51,9 @@ export function FormModalBlog(props: FormModalBlogType){
                     <input
                      type="url" 
                      name="url"
-                     id=""
+                     id="url"
                      onChange={e => setSendUrl(e.target.value)}
+                     value={url}
                      />
                 </fieldset>
                 <fieldset>
@@ -63,15 +61,18 @@ export function FormModalBlog(props: FormModalBlogType){
                     <input
                     type="text" 
                      name="title" 
-                     id=""
+                     id="title"
                      onChange={e => setSendTitle(e.target.value)}
+                     value={title}
                     />
                 </fieldset>
                 <fieldset>
                     <legend>Descrição completa do Blog</legend>
                     <textarea
                      name="description"
+                     id="description"
                      onChange={e => setSendDescription(e.target.value)}
+                     value={description}
                      />
                 </fieldset>
 
