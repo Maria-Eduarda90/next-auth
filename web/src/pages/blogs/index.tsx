@@ -1,20 +1,28 @@
 import { GetServerSideProps } from 'next';
 import { parseCookies } from 'nookies';
 import { Header } from '../../components/Header';
-
+import { useEffect, useState } from 'react';
 import styles from './styles.module.scss';
 import { Search } from '../../components/Search';
 import { ButtonAddBlog } from '../../components/ButtonAddBlog';
 import { Cards } from '../../components/Cards';
 import { FormModalBlog } from '../../components/FormModalBlog';
-import { useState } from 'react';
+import { api } from '../../api/api';
+import { BlogType } from '../../data/@types/Blog';
 
 export default function Blogs(){
+    const [blogs, setBlogs] = useState<BlogType[]>([]);
     const [modalIsOpen, setIsOpen] = useState(false);
 
     function openModal() {
         setIsOpen(!modalIsOpen);
     }
+
+    useEffect(() => {
+        api.get("/blog").then(response => {
+            setBlogs(response.data);
+        })
+    }, [blogs]);
 
     return(
         <>
@@ -29,7 +37,19 @@ export default function Blogs(){
                         </ButtonAddBlog>
                     </div>
 
-                    <Cards/>
+                <div className={styles.cardContainer}>
+                    {blogs.map(blog => {
+                        return(
+                            <Cards
+                             key={blog.id}
+                             url={blog.url} 
+                             title={blog.title} 
+                             description={blog.description}
+                             href={`${blog.id}`}
+                            />
+                        );
+                    })}
+                </div> 
                     <div className={`${styles.modalWrapper} ${modalIsOpen ? `${styles.active}` : ''}`}>
                         <FormModalBlog onClick={openModal}/>
                     </div>
