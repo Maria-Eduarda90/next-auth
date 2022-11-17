@@ -13,6 +13,9 @@ import { BlogType } from '../../data/@types/Blog';
 export default function Blogs(){
     const [blogs, setBlogs] = useState<BlogType[]>([]);
     const [modalIsOpen, setIsOpen] = useState(false);
+    const [search, setSearch] = useState('');
+
+    const filterBlog = blogs.filter((blog) => blog.title.toLowerCase().indexOf(search) !== -1);
 
     function openModal() {
         setIsOpen(!modalIsOpen);
@@ -31,14 +34,17 @@ export default function Blogs(){
 
                 <section className={styles.section}>
                     <div className={styles.wrapper}>
-                        <Search />
+                        <Search
+                         onChange={e => setSearch(e.target.value)}
+                         value={search}
+                        />
                         <ButtonAddBlog onClick={openModal}>
                             + Add blog
                         </ButtonAddBlog>
                     </div>
 
                 <div className={styles.cardContainer}>
-                    {blogs.map(blog => {
+                    {filterBlog.map(blog => {
                         return(
                             <Cards
                              key={blog.id}
