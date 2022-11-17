@@ -1,6 +1,15 @@
+import { DetailedHTMLProps, InputHTMLAttributes } from 'react';
 import styles from './styles.module.scss';
 
-export function Search(){
+type SearchType = DetailedHTMLProps<
+    InputHTMLAttributes<HTMLInputElement>,
+    HTMLInputElement
+> & {
+    value?: string;
+    onChange?: (value: any) => void;
+}
+
+export function Search(props: SearchType){
     return(
         <input
          type="search" 
@@ -8,6 +17,7 @@ export function Search(){
          id="" 
          className={styles.search}
          placeholder="Pesquise por um blog..."
+         {...props}
         />
     );
 }
