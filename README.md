@@ -81,11 +81,13 @@ $ yarn dev || npm run dev
     - validação de formulário
     - Uploads de imagens
 
-<h1 align="center"> 
-	Projeto
-</h1>
+<h3> 
+	Design do projeto
+</h3>
 
 - [Design System](https://www.figma.com/file/U9TAFDRVFzd8eB8emJNzzH/Untitled/duplicate)
+
+<br/>
 
 <h1 align="center"> 
 	Projeto
@@ -93,8 +95,20 @@ $ yarn dev || npm run dev
 
 <h1 align="center">
   <img src="./web/template/login.png" />
+</h1>
+
+<h1 align="center">
   <img src="./web/template/sign-up.png" />
+</h1>
+
+<h1 align="center">
   <img src="./web/template/home.png" />
+</h1>
+
+<h1 align="center">
   <img src="./web/template/modal.png" />
+</h1>
+
+<h1 align="center">
   <img src="./web/template/filter.png" />
 </h1>
