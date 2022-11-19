@@ -86,3 +86,15 @@ $ yarn dev || npm run dev
 </h1>
 
 - [Design System](https://www.figma.com/file/U9TAFDRVFzd8eB8emJNzzH/Untitled/duplicate)
+
+<h1 align="center"> 
+	Projeto
+</h1>
+
+<h1 align="center">
+  <img src="./web/template/login.png" />
+  <img src="./web/template/sign-up.png" />
+  <img src="./web/template/home.png" />
+  <img src="./web/template/modal.png" />
+  <img src="./web/template/filter.png" />
+</h1>
